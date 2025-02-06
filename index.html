@@ -1,0 +1,332 @@
+    <!DOCTYPE html>
+    <html lang="no">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>IT Support - Skolen</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Inter', sans-serif;
+            }
+
+            :root {
+                --primary: #2563eb;
+                --primary-dark: #1d4ed8;
+                --secondary: #64748b;
+                --accent: #0ea5e9;
+                --background: #f8fafc;
+                --text: #1e293b;
+            }
+
+            body {
+                background-color: var(--background);
+                color: var(--text);
+            }
+
+            .navbar {
+                background-color: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1.25rem 2rem;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                position: fixed;
+                width: 100%;
+                top: 0;
+                z-index: 1000;
+                transition: all 0.3s ease;
+            }
+
+            .navbar.scrolled {
+                padding: 1rem 2rem;
+                background-color: rgba(255, 255, 255, 0.98);
+            }
+
+            .nav-links {
+                display: flex;
+                justify-content: center;
+                gap: 3rem;
+                list-style: none;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--text);
+                font-weight: 500;
+                transition: all 0.3s ease;
+                position: relative;
+                padding: 0.5rem 0;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 2px;
+                bottom: 0;
+                left: 0;
+                background-color: var(--primary);
+                transition: width 0.3s ease;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+
+            .hero {
+                height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                padding: 0 2rem;
+                position: relative;
+                overflow: hidden;
+                background-image: url('/api/placeholder/1920/1080');
+                background-size: cover;
+                background-position: center;
+            }
+
+            .hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(14, 165, 233, 0.9) 100%);
+            }
+
+            .hero-content {
+                max-width: 900px;
+                position: relative;
+                z-index: 1;
+                color: white;
+            }
+
+            .hero h1 {
+                font-size: 4rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                animation: fadeInDown 1s ease;
+                line-height: 1.2;
+            }
+
+            .hero p {
+                font-size: 1.5rem;
+                margin-bottom: 2.5rem;
+                animation: fadeInUp 1s ease;
+                opacity: 0.9;
+            }
+
+            .section {
+                padding: 6rem 2rem;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+            .section h2 {
+                text-align: center;
+                margin-bottom: 3rem;
+                font-size: 2.5rem;
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            .section-header {
+                text-align: center;
+                max-width: 700px;
+                margin: 0 auto 4rem;
+            }
+
+            .section-header p {
+                color: var(--secondary);
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            .card-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2.5rem;
+                margin-top: 2rem;
+            }
+
+            .card {
+                background: white;
+                padding: 2.5rem;
+                border-radius: 15px;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+                transition: all 0.3s ease;
+                border: 1px solid rgba(0,0,0,0.05);
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+            }
+
+            .card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+                color: var(--text);
+            }
+
+            .card p {
+                color: var(--secondary);
+                line-height: 1.6;
+            }
+
+            .button {
+                display: inline-block;
+                padding: 1rem 2rem;
+                background-color: var(--primary);
+                color: white;
+                text-decoration: none;
+                border-radius: 8px;
+                font-weight: 500;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+
+            .button:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            }
+
+            .card-icon {
+                width: 48px;
+                height: 48px;
+                margin-bottom: 1.5rem;
+                color: var(--primary);
+            }
+
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .feature-item {
+                text-align: center;
+                padding: 2rem;
+                background: white;
+                border-radius: 12px;
+                transition: all 0.3s ease;
+            }
+
+            .feature-item:hover {
+                transform: translateY(-5px);
+            }
+
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+                100% { transform: translateY(0px); }
+            }
+
+            .floating {
+                animation: float 3s ease-in-out infinite;
+            }
+
+            @media (max-width: 768px) {
+                .nav-links {
+                    gap: 1.5rem;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                }
+
+                .hero h1 {
+                    font-size: 3rem;
+                }
+
+                .hero p {
+                    font-size: 1.2rem;
+                }
+
+                .section {
+                    padding: 4rem 1.5rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#3d-printer">3D Printer</a></li>
+                <li><a href="#slice">Slice</a></li>
+                <li><a href="#faq">Vanlige spørsmål</a></li>
+                <li><a href="#docs">Dokumentasjon</a></li>
+            </ul>
+        </nav>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>IT Support for fremtiden</h1>
+                <p>Din teknologipartner for digital suksess på skolen</p>
+                <a href="#contact" class="button">Kom i gang</a>
+            </div>
+        </section>
+
+        <section id="3d-printer" class="section">
+            <div class="section-header">
+                <h2>3D Printer</h2>
+                <p>Utforsk mulighetene med våre moderne 3D-printere og få tilgang til fremtidens teknologi i dag.</p>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Retningslinjer</h3>
+                    <p>Omfattende guide for sikker og effektiv bruk av skolens 3D-printere. Lær om beste praksis og sikkerhetsprotokoller.</p>
+                </div>
+                <div class="card">
+                    <h3>Bestilling</h3>
+                    <p>Enkel online booking av printertid. Følg prosjektet ditt fra start til slutt med vårt intuitive bestillingssystem.</p>
+                </div>
+                <div class="card">
+                    <h3>Materialer</h3>
+                    <p>Stort utvalg av kvalitetsmaterialer tilgjengelig. Fra standard PLA til avanserte komposittmaterialer.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="slice" class="section">
+            <div class="section-header">
+                <h2>Slice</h2>
+                <p>Optimaliser dine 3D-modeller for perfekte utskrifter hver gang.</p>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Programvare</h3>
+                    <p>Detaljert veiledning for bruk av profesjonell slice-programvare. Fra grunnleggende til avanserte innstillinger.</p>
+                </div>
+                <div class="card">
+                    <h3>Tips og triks</h3>
+                    <p>Eksperttips for optimale printresultater. Lær hvordan du unngår vanlige feil og forbedrer kvaliteten på utskriftene dine.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="section">
+            <div class="section-header">
+                <h2>Vanlige spørsmål</h2>
+                <p>Finn svar på de mest stilte spørsmålene om våre IT-tjenester.</p>
+            </div>
+            <div class="card-container">
+                <div class="card">
+                    <h3>Generelle spørsmål</h3>
+                    <p>Omfattende FAQ som dekker alt fra tilgang til tjenester til daglig bruk av skolens IT-systemer.</p>
+                </div>
+                <div class="card">
+                    <h3>Teknisk support</h3>
+                    <p>Trinnvise løsninger på vanlige tekniske utfordringer, samt direkte tilgang til vårt support-team.</p>
+                </div>
+            </div>
+        </section>
+        <script src="script.js">JScode</script>
+    </body>
+    </html>
