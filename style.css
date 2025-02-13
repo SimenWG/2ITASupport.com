@@ -24,13 +24,14 @@ body {
   color: var(--text);
 }
 
-img {
+img:not(#img2) {
   width: 150px;
   position: absolute;
   left: 20px;
   top: 15px;
   cursor: pointer;
 }
+
 
 .navbar {
   background-color: rgba(255, 255, 255, 0.95);
@@ -269,6 +270,12 @@ canvas {
   display: none;
 }
 
+@media (min-width: 769px) {
+  #img2 {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -297,8 +304,16 @@ canvas {
     margin-left: 30px;
   }
 
-  img {
+  #img {
     display: none;
+  }
+
+  #img2 {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    width: 150px;
+    cursor: pointer;
   }
   
   .hero h1 {
@@ -313,4 +328,3 @@ canvas {
       padding: 4rem 1.5rem;
   }
 }
-
