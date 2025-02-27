@@ -31,3 +31,7 @@ function scrollToTop() {
         behavior: 'smooth'
     });
 }
+
+function windowLocation() {
+    window.location.href = "../index.html"
+}
