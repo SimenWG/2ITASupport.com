@@ -1,0 +1,362 @@
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --secondary: #64748b;
+  --accent: #0ea5e9;
+  --background: #f8fafc;
+  --text: #1e293b;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+}
+
+img:not(#img2) {
+  width: 150px;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+  cursor: pointer;
+}
+
+
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1.25rem 2rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 1rem 2rem;
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 2rem;
+  position: relative;
+  overflow: hidden;
+  background-image: url('/api/placeholder/1920/1080');
+  background-size: cover;
+  background-position: center;
+}
+
+canvas { 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none; 
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.9) 0%, rgba(14, 165, 233, 0.9) 100%);
+}
+
+.hero-content {
+  max-width: 900px;
+  position: relative;
+  z-index: 1;
+  color: white;
+}
+
+.hero h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  animation: fadeInDown 1s ease;
+  line-height: 1.2;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  margin-bottom: 2.5rem;
+  animation: fadeInUp 1s ease;
+  opacity: 0.9;
+}
+
+.section {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 4rem;
+}
+
+.section-header p {
+  color: var(--secondary);
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+.card p {
+  color: var(--secondary);
+  line-height: 1.6;
+}
+
+.button {
+  display: inline-block;
+  padding: 1rem 2rem;
+  background-color: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+}
+
+#scrollUp {
+  display: none;
+  position: fixed;
+  bottom: 30px; 
+  right: 20px; 
+  z-index: 99;
+  cursor: pointer; 
+  font-size: 24px; 
+  padding: 4px 6px;
+  transition: transform 0.3s ease-in-out;
+}
+#scrollUp:hover {
+  background: lightgrey;
+  border-radius: 50%;
+  transform: scale(1.2);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+.ham-menu {
+  display: none;
+}
+
+@media (min-width: 769px) {
+  #img2 {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    position: absolute;
+    top: 79px;  
+    left: 0;
+    padding: 1rem 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .ham-menu {
+    display: block;
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  .nav-links a {
+    text-align: center;
+    margin-left: 30px;
+  }
+
+  #img {
+    display: none;
+  }
+
+  #img2 {
+    position: absolute;
+    top: 25px;
+    right: 20px;
+    width: 150px;
+    cursor: pointer;
+  }
+  
+  .hero h1 {
+      font-size: 3rem;
+  }
+
+  .hero p {
+      font-size: 1.2rem;
+  }
+
+  .section {
+      padding: 4rem 1.5rem;
+  }
+}
+
+.buttonspice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #2563eb;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  width: 200px;
+  margin: 20px auto;
+}
+
+.buttonspice a {
+  color: white;
+  text-decoration: none;
+}
+
+.buttonspice:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.buttonspice:active {
+  transform: scale(0.98);
+}
